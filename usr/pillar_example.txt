@@ -1,0 +1,29 @@
+# Sample of pillar file for 'usr' state.
+# 'users' dictionary contains all user specific information.
+# 'users_active' contains list of users to create in usr.add state
+# 'users_revoked' is used by usr.del state. All users from this dict with
+# boolean value True will be deleted with their home directories.
+# 'key_revoked' is used by usr.del and rmkey states. The key from this field
+# will be removed from any homedir found in /etc/passwd.
+# Note that full names in users_active, users_revoked, users should match.
+# Paste ssh-key without comment. It will be added automatically in salt state.
+
+users_active:
+  bob_bannister: True
+  john_wayne: False
+
+users_revoked:
+  john_wayne: True
+
+key_revoked: 'ssh-rsa AAAAB3Nza...'
+
+users:
+  bob_bannister:
+    username: 'bobby'
+    ssh-key: 'ssh-rsa AAAAB3Nza...'
+    sudo: True
+  john_wayne:
+    username: 'johnny'
+    ssh-key: 'ssh-rsa AAAAB3Nza...'
+    sudo: False
+
